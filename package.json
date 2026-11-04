@@ -1,0 +1,19 @@
+{
+  "name": "lead-evidence-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local lead follow-up, evidence validation and formal buyer research workflows.",
+  "license": "MIT",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "demo": "node scripts/demo.mjs",
+    "test": "node scripts/test.mjs",
+    "test:node": "node scripts/test.mjs node",
+    "test:python": "node scripts/test.mjs python",
+    "test:formal": "node scripts/test.mjs formal",
+    "check:privacy": "node scripts/check_public_tree.mjs"
+  },
+  "repository": { "type": "git", "url": "https://github.com/alan113523/lead-evidence-workbench.git" },
+  "bugs": { "url": "https://github.com/alan113523/lead-evidence-workbench/issues" },
+  "keywords": ["lead-management", "evidence", "sqlite", "due-diligence", "local-first"]
+}

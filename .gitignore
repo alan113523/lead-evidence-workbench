@@ -1,0 +1,29 @@
+# Runtime data, business information and browser sessions
+/data/
+/outputs/
+/exports/
+/work/
+/logs/
+/envs/
+/.browser-profiles/
+/.codex/
+/.agents/
+*.private.*
+*.sqlite
+*.sqlite3
+*.db
+*.xlsx
+*.pdf
+.env
+.env.*
+!.env.example
+*credential*
+*secret*
+# Rebuildable dependencies
+node_modules/
+.deps/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
