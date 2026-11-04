@@ -12,6 +12,7 @@
 
 | 模块 | 提供的能力 |
 |---|---|
+| 账号只读采集 | 商机/询盘、买家资料补充、询盘关联访客、广告商机，以及已有聊天采集 |
 | 商机台账 | 幂等导入、SQLite 存储、跨店身份边界 |
 | 沟通复核 | 产品、质量、深度沟通及逐项证据引用 |
 | 历史索引 | 复用已有证据，发现缺页、变更和版本冲突 |
@@ -52,6 +53,29 @@ npm run demo -- first-demo
 
 演示中的公司、买家、聊天和判断全部虚构。当前看板及工作簿使用中文标签。真实资料只应保存在本机被 Git 忽略的目录中。
 
+## 商机与客户资料采集器
+
+公开项目包含采集器源码和统一入口。推荐入口使用用户自己的已登录浏览器，读取商机/询盘及扩展字段，按明确范围补充买家资料；还可选取询盘关联访客和广告商机。已有聊天窗口采集、正式背调中的客户列表/详情/买家主页采集也一并保留。
+
+无需账号即可运行采集编排的合成演示：
+
+```bash
+npm run demo:collect -- collector-demo
+```
+
+真实账号采集需要先安装可选传输依赖，在本机 `data/collector.json` 填入自己已核验的店铺和账号身份：
+
+```bash
+npm install --prefix .deps --no-save --no-package-lock --ignore-scripts playwright-core@1.60.0
+npm run collect -- --config data/collector.json --out data/new-inquiries --from 2026-01-01 --to 2026-01-07 --chains inquiries
+```
+
+浏览器必须由使用者自行登录并提供本机 CDP 入口。程序在读取前后核对店铺域名、companyId 和主账号 AliId，不自动开浏览器、切店、发送消息或改广告计划；结果只写入被 Git 忽略的 `data/`。
+
+另保留八类供宿主集成的浏览器适配器：询盘列表、会员关联询盘、买家等级、精确 CRM 链接、订单候选、分配/公海记录、访客和广告报表。它们需要新鲜的店铺/浏览器证明；宿主须在接受结果前再次实时核验身份。模块清单、限制和配置方法见[采集器指南](docs/collectors.md)。
+
+合成演示及离线测试不等于真实账号采集已通过，也不代表全周期、全店或平台全部功能覆盖。公开项目不携带任何真实账号或采集结果。
+
 ## 正式背调
 
 正式流程位于 [`formal-review/`](formal-review/README.md)，包含本机脚本、规则、合成测试、报告模板及第三方版权声明。
@@ -86,6 +110,7 @@ npm run check:privacy
 测试使用临时合成数据；真实账号、浏览器采集和外部名单下载不由离线测试替代。Windows 测试入口显式使用 UTF-8。
 
 - [安装、商机导入和输入示例](docs/getting-started.md)
+- [商机采集器、配置与模块清单](docs/collectors.md)
 - [架构与证据边界](docs/architecture.md)
 - [正式背调流程](formal-review/README.md)
 - [发布验证记录](docs/validation.md)

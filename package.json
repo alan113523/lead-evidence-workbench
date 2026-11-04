@@ -1,12 +1,14 @@
 {
   "name": "lead-evidence-workbench",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Local lead follow-up, evidence validation and formal buyer research workflows.",
   "license": "MIT",
   "engines": { "node": ">=24.0.0" },
   "scripts": {
     "demo": "node scripts/demo.mjs",
+    "demo:collect": "node scripts/demo_collection.mjs",
+    "collect": "node scripts/collect_readonly_chains.mjs",
     "test": "node scripts/test.mjs",
     "test:node": "node scripts/test.mjs node",
     "test:python": "node scripts/test.mjs python",

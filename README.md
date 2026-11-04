@@ -27,6 +27,7 @@ The public repository contains source code, synthetic examples and tests. Your c
 
 | Capability | Result |
 |---|---|
+| Collect from your own verified account | Bounded inquiries, buyer-detail enrichment, inquiry-associated visitors and advertising opportunities |
 | Import saved inquiries | An idempotent SQLite lead ledger with explicit store boundaries |
 | Review conversations | Product, lead quality and communication-depth assessments backed by references |
 | Reuse evidence | A rebuildable history index that detects changed files, gaps and conflicting versions |
@@ -99,6 +100,29 @@ node scripts/inquiries.mjs import --file data/first-demo/inquiries-demoalpha.jso
 
 The importer rejects rows from a different store. For your own inputs, use the [single-store JSONL contract](docs/getting-started.md#inquiry-import).
 
+## Account data collectors
+
+The repository includes collection code, not just importers. The recommended live entry point attaches to your own verified browser using an optional, pinned Playwright Core dependency. It reads inquiries and their extra fields, can enrich buyer details, and optionally collects inquiry-associated visitors and advertising opportunities. Chat-window collection and the formal package's customer-list/detail/profile collection are also included.
+
+Try the same collection orchestrator with invented responses, without a browser or account:
+
+```bash
+npm run demo:collect -- collector-demo
+```
+
+For an authorized live account, first install the optional transport and create your private configuration as described in the [collector guide](docs/collectors.md):
+
+```bash
+npm install --prefix .deps --no-save --no-package-lock --ignore-scripts playwright-core@1.60.0
+npm run collect -- --config data/collector.json --out data/new-inquiries --from 2026-01-01 --to 2026-01-07 --chains inquiries
+```
+
+Collection requires an existing logged-in Chromium browser with a loopback CDP endpoint, an explicit store minisite, company ID and main-account AliId. The tool checks those identities before and after reads, does not start a browser or send buyer messages, and saves outputs only under ignored `data/`.
+
+Eight lower-level browser adapters are included for host integrations: inquiry lists, member-linked inquiries, buyer levels, exact CRM links, order candidates, assignment/pool records, visitors and advertising reports. They require fresh store/route proofs and host verification before accepting results; their scopes and entry points are listed in [the collector inventory](docs/collectors.md#included-modules).
+
+Offline tests and the synthetic demo do not certify access to a real account or complete platform coverage. Account IDs, session artifacts and live results are never bundled.
+
 ## Formal buyer review
 
 The optional [`formal-review/`](formal-review/README.md) package includes input validation, browser-collection adapters, cited research records, entity matching, nine-dimension analysis, risk checks, report generation and PDF validation.
@@ -143,6 +167,7 @@ Tests use temporary synthetic fixtures. Platform-specific integrations and real 
 ## Documentation
 
 - [Getting started and input examples](docs/getting-started.md)
+- [Collectors, private configuration and module inventory](docs/collectors.md)
 - [Architecture and evidence boundaries](docs/architecture.md)
 - [Privacy and publication policy](docs/privacy.md)
 - [Formal buyer-review workflow](formal-review/README.md)

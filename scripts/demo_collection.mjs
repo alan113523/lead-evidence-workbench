@@ -1,0 +1,12 @@
+import {existsSync,mkdirSync,writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {main} from './collect_readonly_chains.mjs';
+import {syntheticCollectorSession} from '../examples/collector_session.mjs';
+const name=process.argv[2]||`collector-demo-${Date.now()}`;
+if(!/^[a-zA-Z0-9_-]+$/.test(name))throw Error('simple_new_demo_name_required');
+const dir=resolve('data',name);
+if(existsSync(dir))throw Error('output_already_exists');
+mkdirSync(dir,{recursive:true,mode:0o700});
+writeFileSync(resolve(dir,'config.json'),JSON.stringify({store:'demoalpha',cdp:'http://127.0.0.1:9222/',expectedHost:'demoalpha.en.alibaba.com',companyId:'1',adminAliId:'2'},null,2),{flag:'wx',mode:0o600});
+process.stdout.write('SYNTHETIC collection: no browser, account, API or network calls.\n');
+await main(['--config',`data/${name}/config.json`,'--out',`data/${name}/run`,'--from','2026-01-05','--to','2026-01-05','--chains','inquiries,visitors,opportunities','--campaign-id','101','--enrich-limit','0'],{sessionFactory:syntheticCollectorSession});

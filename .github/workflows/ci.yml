@@ -27,9 +27,15 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install -r requirements.txt
+      - name: Install optional collection transport
+        run: npm install --prefix .deps --no-save --no-package-lock --ignore-scripts playwright-core@1.60.0
+      - name: Verify pinned transport
+        run: node -e "if(require('./.deps/node_modules/playwright-core/package.json').version!=='1.60.0')process.exit(1)"
       - run: npm run check:privacy
       - run: npm test
       - run: npm run demo -- ci-demo
+      - run: npm run demo:collect -- ci-collector-demo
+      - run: npm run collect -- --help
       - run: python -X utf8 formal-review/examples/synthetic_demo.py --out data/ci-formal --customers 3 --matched 0
       - name: Scan published Git history
         if: runner.os == 'Linux'

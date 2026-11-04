@@ -1,5 +1,17 @@
 # Release verification
 
+## Collector extension — 0.1.1
+
+The collector extension passed 270 Node tests, 131 core Python tests and 54 formal-workflow tests locally: 455 passed, no failures. One additional private-response replay was explicitly skipped because no real-account samples were provided. The focused collector/security suite was rechecked after the final persistence filter change.
+
+The new synthetic collection demo exercised inquiries, inquiry-associated visitors and advertising opportunities using the real orchestrator with invented responses. Its inquiry member-bundle was imported by the existing SQLite importer. CLI help was verified without browser dependencies. No live account was connected for this release task.
+
+Regressions cover forbidden configuration/module loading, endpoint/query/method/body guards, fresh store/route proofs, session-value redaction, symlink containment, existing-output preservation, owned-page-only cleanup and identity failure. The optional Playwright Core dependency is pinned to 1.60.0 and installed/checked by CI.
+
+The GitHub Actions result is the source of truth for the hosted Windows/Ubuntu runs. Live account access, current platform response availability and full-period coverage still require a separately authorized small sample.
+
+## Initial public snapshot — 0.1.0
+
 The initial public source snapshot was validated on Windows with Node.js 24 and Python 3.12 in a newly created virtual environment. Dependencies were installed from the published `requirements.txt`; no authenticated account or real customer input was used.
 
 | Check | Observed result |

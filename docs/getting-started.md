@@ -50,6 +50,8 @@ Use new output paths. The dashboard and workbook builders reject overwriting exi
 
 ## Browser adapters
 
+The recommended account collection command and optional Playwright Core installation are documented in the [collector guide](collectors.md). `npm run demo:collect -- example-collector` exercises the same orchestrator with entirely invented responses and needs no browser or account.
+
 The core includes resumable chat-collection and browser-binding adapters. They do not open a browser automatically. A host integration must execute each ticket on the exact selected connection and return the fresh seller proof with the requested response. Never infer identity from a browser label or copy another account's binding.
 
 The public package accepts a valid caller-supplied store slug. The synthetic names are examples, not a publisher-account allowlist. Browser store slugs must correspond to the actual verified minisite hostname. Keep private binding maps under `data/`; see the formal package's [collection contract](../formal-review/references/collection-contract.md).

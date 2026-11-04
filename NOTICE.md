@@ -12,4 +12,6 @@ The report template includes selected Phosphor Icons paths. Copyright (c) 2023 P
 
 Python dependencies are installed separately under their own licenses. Chrome/Edge, fonts, sanctions-list data, authenticated browser profiles and proprietary desktop-software artifacts are not distributed.
 
+The read-only account adapters are project-authored interoperability code: request descriptors, response parsers and bounded orchestration based on previously observed platform protocols. They do not contain third-party application binaries, bytecode, vendor databases, licenses or account samples. The optional Playwright Core transport is installed separately under its Apache-2.0 license.
+
 Alibaba and other platform names in protocol identifiers describe interoperability. They do not imply endorsement or a bundled platform account.

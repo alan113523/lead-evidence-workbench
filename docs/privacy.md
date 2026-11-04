@@ -14,6 +14,8 @@ Source hashes establish a binding; they do not anonymize the underlying informat
 
 Generated HTML embeds reviewed records so it can work without a server. Treat the HTML, workbook, PDF, state directory and observations as private business files. Do not upload them to a public static host merely because the source code is public.
 
+Account collection uses private configuration under `data/`, not credentials committed to the repository. Session hints stay in memory; persisted collection payloads remove transport fields and credential-bearing text/URLs. Business identifiers such as a visitor's `buyerCookieId` can remain necessary for local association and are still private business data. A successful credential filter does not make a collected record anonymous or suitable for publication.
+
 ## Before committing
 
 Run `npm run check:privacy`, review `git diff --cached` and scan the entire history that will be published with a credential scanner such as [Gitleaks](https://github.com/gitleaks/gitleaks). A scanner cannot determine whether a company, account ID or business statement is private; human source review is also required.

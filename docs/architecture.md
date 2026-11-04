@@ -4,6 +4,7 @@ The workbench uses files and SQLite instead of a background service. The offline
 
 ```text
 scripts/             Core import, assessment, history and reporting modules
+scripts/alibaba_readonly/  Allowlisted account reads, protocol parsing and orchestration
 lib/                 Shared browser identity and chat-evidence validators
 formal-review/       Optional staged research, reports and PDF workflow
 tests/               Synthetic core regressions
@@ -35,3 +36,5 @@ Public chat runs pin the exact published source bytes. The release does not carr
 ## Runtime boundaries
 
 The demo and core transformations are local and offline. Collection adapters require an authorized browser host and live identity checks. Formal research requires an operator to obtain and document sources. UK-list screening is a separately invoked tool; it does not download or silently complete a missing check during the ordinary demo. Reports and state flags cannot authorize outreach or CRM writes.
+
+The account-collection CLI uses an existing loopback CDP connection. Store identity is pinned by minisite, company ID and main-account AliId; request descriptors have per-endpoint methods, fields and operation checks. Browser session material stays in memory, persisted results pass through transport redaction, and output paths reuse the core data-directory/symlink checks. Its synthetic session is used only by the explicit collection demo and tests, not selected through live configuration.
